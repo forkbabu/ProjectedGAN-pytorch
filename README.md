@@ -1,3 +1,9 @@
+```
+!wget https://github.com/RangiLyu/EfficientNet-Lite/releases/download/v1.0/efficientnet_lite1.pth
+!python projected_gan.py --dataset-path /kaggle/input/
+
+```
+
 # ProjectedGAN - Pytorch
 Pytorch implementation of ProjectedGAN (https://arxiv.org/abs/2111.01007)
 

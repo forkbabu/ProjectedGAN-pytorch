@@ -13,6 +13,7 @@ from differentiable_augmentation import DiffAugment
 from dataset import load_data
 import argparse
 import logging
+import wandb
 logging.basicConfig(format="%(asctime)s - %(levelname)s: %(message)s", level=logging.INFO, datefmt="%I:%M:%S")
 
 
@@ -85,7 +86,7 @@ class CSM(nn.Module):
             high_res = self.conv1(high_res_flatten)
             high_res = high_res.view(batch, channels, width, height)
             high_res = self.conv3(high_res)
-            high_res = F.interpolate(high_res, scale_factor=2., mode="bilinear")
+            high_res = F.interpolate(high_res, scale_factor=2., mode="bilinear",align_corners=True)
             return high_res
         else:
             high_res_flatten = high_res.view(batch, channels, width * height)
@@ -93,7 +94,7 @@ class CSM(nn.Module):
             high_res = high_res.view(batch, channels, width, height)
             high_res = torch.add(high_res, low_res)
             high_res = self.conv3(high_res)
-            high_res = F.interpolate(high_res, scale_factor=2., mode="bilinear")
+            high_res = F.interpolate(high_res, scale_factor=2., mode="bilinear",align_corners=True)
             return high_res
 
 
